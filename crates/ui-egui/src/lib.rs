@@ -113,6 +113,7 @@ pub mod gallery_ui;
 pub mod gpu_canvas;
 pub mod gpu_status;
 pub mod gradient_ui;
+pub mod generative_ui;
 pub mod guide_layout_ui;
 pub mod guide_select;
 pub mod histogram_panel;
@@ -614,6 +615,9 @@ pub struct Services {
     pub beep: Option<fn()>,
     /// Starts a background check for published releases (desktop, outside Flatpak).
     pub check_updates: Option<photocraft_engine::updates_cmds::CheckFn>,
+    /// Edit › Generative Fill's image model (desktop: ComfyUI on this computer). `None` disables
+    /// the command with a reason, as in the web build and tests.
+    pub generative: Option<std::sync::Arc<dyn photocraft_engine::generative_cmds::GenerativeBackend>>,
     /// Files delivered asynchronously (web drag-and-drop): drained every frame and opened as
     /// documents.
     pub inbox: Option<Inbox>,
@@ -1066,6 +1070,7 @@ impl SyntheticTarget {
 impl PhotocraftApp {
     pub fn new(mut session: Session, mut services: Services) -> Self {
         session.updates.check = services.check_updates.take();
+        session.generative.backend = services.generative.take();
         let mut app = Self {
             session,
             ui: UiState::default(),

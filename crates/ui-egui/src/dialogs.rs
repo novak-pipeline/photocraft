@@ -441,6 +441,7 @@ pub fn show(app: &mut PhotocraftApp, ctx: &egui::Context) {
                 DialogKind::Command if crate::fill_ui::owns(&fields) => crate::fill_ui::body(app, ui, &mut fields),
                 DialogKind::Command if crate::pattern_fill_ui::owns(&fields) => crate::pattern_fill_ui::body(app, ui, &mut fields),
                 DialogKind::Command if crate::stroke_ui::owns(&fields) => crate::stroke_ui::body(ui, &mut fields),
+                DialogKind::Command if crate::generative_ui::owns(&fields) => crate::generative_ui::body(ui, &mut fields),
                 DialogKind::Command if crate::snapshot_dialog::owns(&fields) => crate::snapshot_dialog::body(ui, &mut fields),
                 DialogKind::Command if crate::channel_options_ui::owns(&fields) => crate::channel_options_ui::body(ui, &mut fields),
                 DialogKind::Command if crate::channel_options_ui::owns_new_spot(&fields) => crate::channel_options_ui::new_spot_body(ui, &mut fields),
@@ -752,6 +753,7 @@ const ROUTES: &[fn(&Fields) -> bool] = &[
     crate::fill_ui::owns,
     crate::pattern_fill_ui::owns,
     crate::stroke_ui::owns,
+    crate::generative_ui::owns,
     crate::channel_options_ui::owns,
     crate::channel_options_ui::owns_new_spot,
     crate::shape_dialog::owns,
@@ -844,6 +846,7 @@ pub fn confirm(app: &mut PhotocraftApp, id: u64) -> Result<Value, String> {
         DialogKind::Command if crate::fill_ui::owns(&d.fields) => crate::fill_ui::confirm(app, &d.fields),
         DialogKind::Command if crate::pattern_fill_ui::owns(&d.fields) => crate::pattern_fill_ui::confirm(app, &d.fields),
         DialogKind::Command if crate::stroke_ui::owns(&d.fields) => crate::stroke_ui::confirm(app, &d.fields),
+        DialogKind::Command if crate::generative_ui::owns(&d.fields) => crate::generative_ui::confirm(app, &d.fields),
         DialogKind::Command if crate::snapshot_dialog::owns(&d.fields) => crate::snapshot_dialog::confirm(app, &d.fields),
         DialogKind::Command if crate::channel_options_ui::owns(&d.fields) => crate::channel_options_ui::confirm(app, &d.fields),
         DialogKind::Command if crate::channel_options_ui::owns_new_spot(&d.fields) => crate::channel_options_ui::confirm_new_spot(app, &d.fields),
@@ -961,6 +964,9 @@ pub fn open_command_dialog(app: &mut PhotocraftApp, command: &str, label: &str) 
     }
     if command == crate::stroke_ui::COMMAND {
         return crate::stroke_ui::open(app);
+    }
+    if command == crate::generative_ui::COMMAND {
+        return crate::generative_ui::open(app);
     }
     if command == crate::color_range_ui::COMMAND {
         return crate::color_range_ui::open(app);

@@ -45,6 +45,10 @@ arboard = { version = "3.7", features = ["wayland-data-control"] }
 open = "5"
 # Reads the saved window layout (eframe persistence) to drop values that would abort startup.
 ron = "0.12"
+# Edit > Generative Fill through a local ComfyUI: plain HTTP to localhost (no TLS) and PNG
+# transfer. Both are already in the dependency tree (craft-update, photocraft-codecs).
+ureq = { version = "3", default-features = false }
+png = "0.18"
 # Background release checks; HTTPS with Rust TLS, no async runtime.
 
 [target.'cfg(target_os = "macos")'.dependencies]

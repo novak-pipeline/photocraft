@@ -151,6 +151,8 @@ const LINK_W: f32 = 20.0;
 /// sections (Character/Paragraph/Type Options for type, Appearance/Shape for shapes), then Quick
 /// Actions, all with the same collapsible headers (#155).
 pub fn properties(app: &mut PhotocraftApp, ui: &mut egui::Ui, layer: &Layer) {
+    // A layer Generative Fill made: its prompt and variations first, as in Photoshop.
+    crate::generative_ui::properties(app, ui, layer);
     let mut run: Vec<(String, Value)> = Vec::new();
     if let Some(s) = layer.surface() {
         let bb = frame(layer, app.layer_frame_bounds(layer, s));

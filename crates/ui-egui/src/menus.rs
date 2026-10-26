@@ -461,6 +461,14 @@ pub(crate) fn invoke_unguarded(app: &mut PhotocraftApp, ctx: &egui::Context, id:
             }
             Ok(json!({"dialog": crate::stroke_ui::open(app)}))
         }
+        // Edit › Generative Fill…: the prompt dialog from menus; explicit params (Actions, CLI,
+        // MCP, the control channel) run the fill directly.
+        crate::generative_ui::COMMAND if params.as_object().is_none_or(|o| o.is_empty()) => {
+            if let Some(Err(why)) = photocraft_engine::commands::find(id).map(|c| (c.enabled)(&app.session)) {
+                return Err(why);
+            }
+            Ok(json!({"dialog": crate::generative_ui::open(app)}))
+        }
         // Channels › Channel Options… without params: the dialog on the targeted alpha/spot
         // channel, Layer Mask Display Options on a targeted layer mask, or Quick Mask Options while
         // in Quick Mask (with params: the engine directly).

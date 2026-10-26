@@ -215,6 +215,11 @@
 
 # Consolidated Greek localization additions
 	Content-Aware Fill…	Γέμισμα βάσει περιεχομένου…
+	Generative Fill…	Παραγωγικό γέμισμα…
+	Generative Fill	Παραγωγικό γέμισμα
+	Prompt:	Περιγραφή:
+	Variations:	Παραλλαγές:
+	Describe what to add, or leave empty to fill from the surroundings	Περιγράψτε τι να προστεθεί ή αφήστε κενό για γέμισμα από τον περίγυρο
 	Content-Aware Scale	Κλιμάκωση βάσει περιεχομένου
 	Puppet Warp	Παραμόρφωση με σημεία ελέγχου
 	Auto-Align Layers…	Αυτόματη στοίχιση επιπέδων…

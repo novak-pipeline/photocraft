@@ -42,6 +42,7 @@ pub mod edit_menu_cmds;
 pub mod eraser_cmds;
 pub mod export_preset_cmds;
 pub mod exr_cmds;
+pub mod generative_cmds;
 pub mod extra_cmds;
 pub mod face_cmds;
 pub mod file_cmds;
@@ -512,6 +513,8 @@ pub struct Session {
     pub prefs: prefs::PrefsStore,
     /// Release checks use an injected platform transport; no network I/O in the engine.
     pub updates: updates_cmds::Updates,
+    /// Edit › Generative Fill: the injected image-model backend and the variations it made.
+    pub generative: generative_cmds::Generative,
     /// Edit menu state: Fade source, custom shape library (see `edit_menu_cmds`).
     pub edit_state: edit_menu_cmds::EditState,
     /// The pattern library (Window › Patterns; see `pattern.*`).
